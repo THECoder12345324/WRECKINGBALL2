@@ -7,7 +7,7 @@ var engine, world;
 var box1, pig1;
 var pig = [];
 var backgroundImg, ground2, constrainedLog;
-var chain, pigchain;
+var chain, chain2, pigchain;
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -57,28 +57,14 @@ function setup(){
     guardpig1 = new Pig(250, 10);
     guardpig2 = new Pig(350, 10);
 
-    //pig50 = new Pig(1400, 50);
-    //pig51 = new Pig(1500, 50);
-
-    for (var i = 0; i < 5; i++) {
+    /*for (var i = 0; i < 5; i++) {
         pig[i] = new Pig(1100 + (i * 100), 50);
-        //pigchain = new Chain(pig[i].body, pig[i - 1].body)
-    }
+    }*/
 
-    /*bird = new Bird(100,100, "sprites/bird.png");
-    bird2 = new Bird(200, 200, "sprites/chuck2.png");*/
+    bird = new Bird(1000,100, "sprites/bird.png");
+    //bird2 = new Bird(200, 200, "sprites/chuck2.png");
 
-    constrainedLog = new Log(0, 200, 100, PI / 2);
-
-    /*var options = {
-        bodyA: bird.body,
-        bodyB: constrainedLog.body,
-        stiffness: 0.08,
-        length: 10
-    }
-    var chain = Constraint.create(options);
-    World.add(world, chain);*/
-    //chain = new Chain(bird.body, constrainedLog.body, 0.08, 10);
+    chain = new Slingshot(bird.body, {x: 1200, y: 200}, 0.08, 10);
     //pigchain = new Chain(pig50.body, pig51.body, 0.08, 50);
 }
 
@@ -128,20 +114,20 @@ function draw(){
 
     log6.display();
 
-    constrainedLog.display();
+    chain.display();
 
 
-    for (var i = 0; i < 5; i++) {
+    /*for (var i = 0; i < 5; i++) {
         pig[i].display();
         
     }
     for (var i = 0; i < 4; i++) {
-        chain = new Chain(pig[i].body, pig[i+1].body, 0.08, 10);
-        chain.display();
-    }
+        chain2 = new Slingshot(pig[i].body, pig[i+1].body, 0.08, 10);
+        chain2.display();
+    }*/
 
-    /*bird.display();
-    bird2.display();*/
+    bird.display();
+    //bird2.display();
 
     /*pig50.display();
     pig51.display();*/
@@ -150,4 +136,11 @@ function draw(){
     //pigchain.display();
     //strokeWeight(5);
     //line(bird.body.position.x, bird.body.position.y, constrainedLog.body.position.x, constrainedLog.body.position.y);
+}
+function mouseDragged() {
+    Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+}
+
+function mouseReleased() {
+    chain.fly();
 }
