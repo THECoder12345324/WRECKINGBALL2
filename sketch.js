@@ -20,9 +20,9 @@ function setup(){
 
     
     ground = new Ground(800,height,1600,20);
-    ground2 = new Ground(1300, 300, 600, 20);
+    ground2 = new Ground(275, 300, 600, 20);
 
-    box1 = new Box(700,320,70,70);
+    /*box1 = new Box(700,320,70,70);
     box2 = new Box(920,320,70,70);
     pig1 = new Pig(810, 350);
     log1 = new Log(810,260,300, PI/2);
@@ -35,9 +35,24 @@ function setup(){
 
     box18 = new Box(810,160,70,70);
     log4 = new Log(760,120,150, PI/7);
-    log5 = new Log(870,120,150, -PI/7);
+    log5 = new Log(870,120,150, -PI/7);*/
 
-    box5 = new Box(300, 560, 70, 70);
+    box1 = new Box(1200,320,70,70);
+    box2 = new Box(1420,320,70,70);
+    pig1 = new Pig(1310, 350);
+    log1 = new Log(1310,260,300, PI/2);
+
+    box3 = new Box(1200,240,70,70);
+    box4 = new Box(1420,240,70,70);
+    pig3 = new Pig(1310, 220);
+
+    log3 =  new Log(1310,180,300, PI/2);
+
+    box18 = new Box(1310,160,70,70);
+    log4 = new Log(1260,120,150, PI/7);
+    log5 = new Log(1370,120,150, -PI/7);
+
+    /*box5 = new Box(300, 560, 70, 70);
     box6 = new Box(300, 460, 70, 70);
     box7 = new Box(300, 360, 70, 70);
     box8 = new Box(300, 260, 70, 70);
@@ -55,25 +70,43 @@ function setup(){
     kingpig = new Pig(300, 80);
     log6 = new Log(300, 50, 200, PI/2);
     guardpig1 = new Pig(250, 10);
-    guardpig2 = new Pig(350, 10);
+    guardpig2 = new Pig(350, 10);*/
+
+    box5 = new Box(800, 560, 70, 70);
+    box6 = new Box(800, 460, 70, 70);
+    box7 = new Box(800, 360, 70, 70);
+    box8 = new Box(800, 260, 70, 70);
+    box9 = new Box(800, 160, 70, 70);
+    box10 = new Box(730, 560, 70, 70);
+    box11  = new Box(870, 560, 70, 70);
+    box12  = new Box(730, 460, 70, 70);
+    box13  = new Box(870, 460, 70, 70);
+    box14  = new Box(730, 360, 70, 70);
+    box15  = new Box(870, 360, 70, 70);
+    box16  = new Box(730, 260, 70, 70);
+    box17  = new Box(870, 260, 70, 70);
+    specialpig1 = new Pig(745, 160);
+    specialpig2 = new Pig(855, 160);
+    kingpig = new Pig(800, 80);
+    log6 = new Log(800, 50, 200, PI/2);
+    guardpig1 = new Pig(750, 10);
+    guardpig2 = new Pig(850, 10);
 
     /*for (var i = 0; i < 5; i++) {
         pig[i] = new Pig(1100 + (i * 100), 50);
     }*/
 
-    bird = new Bird(1000,100, "sprites/bird.png");
+    bird = new Bird(100,100, "sprites/bird.png");
     //bird2 = new Bird(200, 200, "sprites/chuck2.png");
 
-    chain = new Slingshot(bird.body, {x: 1200, y: 200}, 0.08, 10);
+    chain = new Slingshot(bird.body, {x: 370, y: 120}, 0.04, 10);
     //pigchain = new Chain(pig50.body, pig51.body, 0.08, 50);
 }
 
 function draw(){
     background(backgroundImg);
     Engine.update(engine);
-    console.log(box2.body.position.x);
-    console.log(box2.body.position.y);
-    console.log(box2.body.angle);
+
     box1.display();
     box2.display();
     ground.display();
@@ -138,6 +171,10 @@ function draw(){
     //line(bird.body.position.x, bird.body.position.y, constrainedLog.body.position.x, constrainedLog.body.position.y);
 }
 function mouseDragged() {
+    Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+}
+
+function mousePressed() {
     Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
 }
 
