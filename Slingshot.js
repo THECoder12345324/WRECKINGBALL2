@@ -52,4 +52,7 @@ class Slingshot{
     fly() {
         this.chain.bodyA = null;
     }
+    attach(body1) {
+        this.chain.bodyA = body1;
+    }
 }

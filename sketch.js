@@ -3,6 +3,7 @@ const World= Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
+var pig = null;
 var engine, world;
 var box1, pig1;
 var pig = [];
@@ -22,21 +23,6 @@ function setup(){
     ground = new Ground(800,height,1600,20);
     ground2 = new Ground(275, 300, 600, 20);
 
-    /*box1 = new Box(700,320,70,70);
-    box2 = new Box(920,320,70,70);
-    pig1 = new Pig(810, 350);
-    log1 = new Log(810,260,300, PI/2);
-
-    box3 = new Box(700,240,70,70);
-    box4 = new Box(920,240,70,70);
-    pig3 = new Pig(810, 220);
-
-    log3 =  new Log(810,180,300, PI/2);
-
-    box18 = new Box(810,160,70,70);
-    log4 = new Log(760,120,150, PI/7);
-    log5 = new Log(870,120,150, -PI/7);*/
-
     box1 = new Box(1200,320,70,70);
     box2 = new Box(1420,320,70,70);
     pig1 = new Pig(1310, 350);
@@ -51,26 +37,6 @@ function setup(){
     box18 = new Box(1310,160,70,70);
     log4 = new Log(1260,120,150, PI/7);
     log5 = new Log(1370,120,150, -PI/7);
-
-    /*box5 = new Box(300, 560, 70, 70);
-    box6 = new Box(300, 460, 70, 70);
-    box7 = new Box(300, 360, 70, 70);
-    box8 = new Box(300, 260, 70, 70);
-    box9 = new Box(300, 160, 70, 70);
-    box10 = new Box(230, 560, 70, 70);
-    box11  = new Box(370, 560, 70, 70);
-    box12  = new Box(230, 460, 70, 70);
-    box13  = new Box(370, 460, 70, 70);
-    box14  = new Box(230, 360, 70, 70);
-    box15  = new Box(370, 360, 70, 70);
-    box16  = new Box(230, 260, 70, 70);
-    box17  = new Box(370, 260, 70, 70);
-    specialpig1 = new Pig(245, 160);
-    specialpig2 = new Pig(355, 160);
-    kingpig = new Pig(300, 80);
-    log6 = new Log(300, 50, 200, PI/2);
-    guardpig1 = new Pig(250, 10);
-    guardpig2 = new Pig(350, 10);*/
 
     box5 = new Box(800, 560, 70, 70);
     box6 = new Box(800, 460, 70, 70);
@@ -160,11 +126,11 @@ function draw(){
     }*/
 
     bird.display();
+    
     //bird2.display();
-
     /*pig50.display();
     pig51.display();*/
-
+    //console.log(pig);
     //chain.display();
     //pigchain.display();
     //strokeWeight(5);
@@ -180,4 +146,15 @@ function mousePressed() {
 
 function mouseReleased() {
     chain.fly();
+}
+/*function keyPressed() {
+    if (keyCode === 32) {
+        chain.attach(bird.body);
+    }
+}*/
+function keyPressed() {
+    if (keyCode === 32) {
+        pig = new Pig(random(100, 1500), random(100, 600));
+        pig.display();
+    }
 }
