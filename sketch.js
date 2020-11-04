@@ -3,15 +3,43 @@ const World= Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
+var READY = 0;
+var FLY = 1;
+var gamestate = READY;
+
+var lives = 3;
+
 var pig = null;
 var engine, world;
 var box1, pig1;
 var pig = [];
-var backgroundImg, ground2, constrainedLog;
+var backgroundImg, ground2, constrainedLog, resetImg;
+var reset = 0;
 var chain, chain2, pigchain;
+
+var string = "This is a string";
+var randNumber = 1259883;
+var bool = true;
+var un;
+var none = null;
+
+var array = ["This is a string", 1223842, false, un, none];
+var array2 = [[1,2], [2,3], [4,5]];
+
+console.log(array2[0][1]);
+console.log(array[1]);
+console.log(array[2]);
+console.log(array[3]);
+
+array.push(23);
+array.pop();
+
+console.log(array[5]);
+console.log(array)
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
+    resetImg = loadImage("sprites/reset.png");
 }
 
 function setup(){
@@ -19,6 +47,7 @@ function setup(){
     engine = Engine.create();
     world = engine.world;
 
+    //console.log(string);
     
     ground = new Ground(800,height,1600,20);
     ground2 = new Ground(275, 300, 600, 20);
@@ -72,6 +101,10 @@ function setup(){
 function draw(){
     background(backgroundImg);
     Engine.update(engine);
+
+    textSize(30);
+    fill(0)
+    text("Lives: " + lives, 20, 50);
 
     box1.display();
     box2.display();
@@ -135,26 +168,98 @@ function draw(){
     //pigchain.display();
     //strokeWeight(5);
     //line(bird.body.position.x, bird.body.position.y, constrainedLog.body.position.x, constrainedLog.body.position.y);
+    if (lives === 0) {
+        reset = image(resetImg, 100, -100, 250, 250);
+    }
 }
 function mouseDragged() {
-    Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+    if (gamestate === READY) {
+        Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+    }
 }
 
 function mousePressed() {
-    Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+    if (lives === 0) {
+        console.log(mouseX);
+        console.log(mouseY);
+        if (mouseX < 307 && mouseX > 137 && mouseY < 60 && mouseY > 13) {
+            cleanitallready();
+            console.log("THis is working")
+        }
+    }
+
 }
 
 function mouseReleased() {
     chain.fly();
+    gamestate = FLY;
 }
-/*function keyPressed() {
+function keyPressed() {
     if (keyCode === 32) {
-        chain.attach(bird.body);
+        if (lives > 0) {
+            chain.attach(bird.body);
+            gamestate = READY;
+            lives -= 1;
+        }
     }
-}*/
+}/*
 function keyPressed() {
     if (keyCode === 32) {
         pig = new Pig(random(100, 1500), random(100, 600));
         pig.display();
     }
+}*/
+
+function cleanitallready() {
+    World.remove(world, kingpig);
+    /*World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    World.remove(world, kingpig);
+    
+    console.log("running")
+    reset = 0;
+    
+    box1 = new Box(1200,320,70,70);
+    box2 = new Box(1420,320,70,70);
+    pig1 = new Pig(1310, 350);
+    log1 = new Log(1310,260,300, PI/2);
+
+    box3 = new Box(1200,240,70,70);
+    box4 = new Box(1420,240,70,70);
+    pig3 = new Pig(1310, 220);
+
+    log3 =  new Log(1310,180,300, PI/2);
+
+    box18 = new Box(1310,160,70,70);
+    log4 = new Log(1260,120,150, PI/7);
+    log5 = new Log(1370,120,150, -PI/7);
+
+    box5 = new Box(800, 560, 70, 70);
+    box6 = new Box(800, 460, 70, 70);
+    box7 = new Box(800, 360, 70, 70);
+    box8 = new Box(800, 260, 70, 70);
+    box9 = new Box(800, 160, 70, 70);
+    box10 = new Box(730, 560, 70, 70);
+    box11  = new Box(870, 560, 70, 70);
+    box12  = new Box(730, 460, 70, 70);
+    box13  = new Box(870, 460, 70, 70);
+    box14  = new Box(730, 360, 70, 70);
+    box15  = new Box(870, 360, 70, 70);
+    box16  = new Box(730, 260, 70, 70);
+    box17  = new Box(870, 260, 70, 70);
+    specialpig1 = new Pig(745, 160);
+    specialpig2 = new Pig(855, 160);
+    kingpig = new Pig(800, 80);
+    log6 = new Log(800, 50, 200, PI/2);
+    guardpig1 = new Pig(750, 10);
+    guardpig2 = new Pig(850, 10);*/
+
+    World.add(world, kingpig);
 }
