@@ -13,7 +13,8 @@ var pig = null;
 var engine, world;
 var box1, pig1;
 var pig = [];
-var backgroundImg, ground2, constrainedLog, resetImg;
+var score = 0;
+var backgroundImg, ground2, constrainedLog, resetImg, nightImg;
 var reset = 0;
 var chain, chain2, pigchain;
 
@@ -38,7 +39,7 @@ console.log(array[5]);
 console.log(array)
 
 function preload() {
-    backgroundImg = loadImage("sprites/bg.png");
+    getBackgroundIMG();
     resetImg = loadImage("sprites/reset.png");
 }
 
@@ -99,12 +100,15 @@ function setup(){
 }
 
 function draw(){
-    background(backgroundImg);
+    if (backgroundImg) {
+        background(backgroundImg);
+    }
     Engine.update(engine);
 
     textSize(30);
     fill(0)
     text("Lives: " + lives, 20, 50);
+    text("Score: " + score, 1450, 50);
 
     box1.display();
     box2.display();
@@ -262,4 +266,21 @@ function cleanitallready() {
     guardpig2 = new Pig(850, 10);*/
 
     World.add(world, kingpig);
+}
+
+async function getBackgroundIMG() {
+    var response = await fetch("http://worldtimeapi.org/api/timezone/America/New_York");
+    //console.log(response)
+    var responsejson = await response.json();
+    console.log(responsejson.datetime);
+    var datetime = responsejson.datetime;
+    var hour = datetime.slice(11, 13);
+    console.log(hour);
+
+    if (hour <= 19 && hour >= 6) {
+        backgroundImg = loadImage("sprites/bg3.png");
+    }
+    if (hour < 6 && hour > 19) {
+        backgroundImg = loadImage("sprites/bg.png");
+    }
 }

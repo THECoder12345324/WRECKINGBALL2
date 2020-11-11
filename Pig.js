@@ -20,6 +20,9 @@ class Pig extends baseClass{
           tint(255, this.Visibility);
           image(this.image, this.body.position.x, this.body.position.y, 80, 80);
           pop();
+          if (this.Visibility > 5) {
+            score += 1;
+          }
         }
       }
       else {
