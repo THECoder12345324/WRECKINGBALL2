@@ -277,13 +277,13 @@ async function getBackgroundIMG() {
     var hour = datetime.slice(11, 13);
     console.log(hour);
 
-    if (hour <= 17 && hour >= 6) {
+    if (hour <= 15 && hour >= 8) {
         backgroundImg = loadImage("sprites/bg.png");
     }
-    if (hour > 17 && hour <= 19) {
+    if ((hour > 17 && hour <= 19) || (hour >= 6 && hour < 8)) {
         backgroundImg = loadImage("sprites/bg3.png");
     }
-    if (hour < 6 && hour > 19) {
+    if ((hour >= 0 && hour < 6)|| hour > 19) {
         backgroundImg = loadImage("sprites/bg2.png");
     }
 }
