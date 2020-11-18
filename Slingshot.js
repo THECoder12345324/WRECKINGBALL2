@@ -11,6 +11,8 @@ class Slingshot{
         this.image1 = loadImage("Sprites/sling1.png");
         this.image2 = loadImage("Sprites/sling2.png");
         this.image3 = loadImage("Sprites/sling3.png");
+
+        this.connect = true;
         World.add(world, this.chain);
     }
     display() {
@@ -50,9 +52,11 @@ class Slingshot{
         }
     }
     fly() {
+        this.connect = false;
         this.chain.bodyA = null;
     }
     attach(body1) {
+        this.connect = true;
         this.chain.bodyA = body1;
     }
 }

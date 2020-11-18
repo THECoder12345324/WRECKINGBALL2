@@ -14,7 +14,7 @@ class Bird extends baseClass {
         this.trajectory.push(birdpos);
       }
       for (var i = 0; i < this.trajectory.length; i++) {
-      image(this.image2, this.trajectory[i][0], this.trajectory[i][1]);
+        image(this.image2, this.trajectory[i][0], this.trajectory[i][1]);
       }
       /*this.body.position.x = mouseX;
       this.body.position.y = mouseY;*/

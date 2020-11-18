@@ -102,6 +102,8 @@ function setup(){
 function draw(){
     if (backgroundImg) {
         background(backgroundImg);
+    } else {
+        background(255);
     }
     Engine.update(engine);
 
@@ -200,8 +202,10 @@ function mouseReleased() {
 }
 function keyPressed() {
     if (keyCode === 32) {
-        if (lives > 0) {
+        if (lives > 0 && chain.connect == false) {
+            Matter.Body.setPosition(bird.body, {x: 370, y: 120})
             chain.attach(bird.body);
+            bird.trajectory = [];
             gamestate = READY;
             lives -= 1;
         }
@@ -215,17 +219,36 @@ function keyPressed() {
 }*/
 
 function cleanitallready() {
-    World.remove(world, kingpig);
-    /*World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
-    World.remove(world, kingpig);
+    World.remove(world, kingpig.body);
+    World.remove(world, pig1.body);
+    World.remove(world, pig3.body);
+    World.remove(world, specialpig1.body);
+    World.remove(world, specialpig2.body);
+    World.remove(world, guardpig1.body);
+    World.remove(world, guardpig2.body);
+
+
+    World.remove(world, box1.body);
+    World.remove(world, box2.body);
+    World.remove(world, box3.body);
+    World.remove(world, box4.body);
+    World.remove(world, box5.body);
+    World.remove(world, box6.body);
+    World.remove(world, box7.body);
+    World.remove(world, box8.body);
+    World.remove(world, box9.body);
+    World.remove(world, box10.body);
+    World.remove(world, box11.body);
+    World.remove(world, box12.body);
+    World.remove(world, box13.body);
+    World.remove(world, box14.body);
+    World.remove(world, box15.body);
+    World.remove(world, box16.body);
+    World.remove(world, box17.body);
+
+    World.remove(world, log1.body);
+    World.remove(world, log3.body);
+    World.remove(world, log6.body);
     
     console.log("running")
     reset = 0;
@@ -263,9 +286,9 @@ function cleanitallready() {
     kingpig = new Pig(800, 80);
     log6 = new Log(800, 50, 200, PI/2);
     guardpig1 = new Pig(750, 10);
-    guardpig2 = new Pig(850, 10);*/
+    guardpig2 = new Pig(850, 10);
 
-    World.add(world, kingpig);
+    lives = 3;
 }
 
 async function getBackgroundIMG() {
@@ -277,7 +300,7 @@ async function getBackgroundIMG() {
     var hour = datetime.slice(11, 13);
     console.log(hour);
 
-    if (hour <= 15 && hour >= 8) {
+    if (hour <= 16 && hour >= 8) {
         backgroundImg = loadImage("sprites/bg.png");
     }
     if ((hour > 17 && hour <= 19) || (hour >= 6 && hour < 8)) {
