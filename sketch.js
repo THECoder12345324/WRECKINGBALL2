@@ -44,13 +44,13 @@ function preload() {
 }
 
 function setup(){
-    var canvas = createCanvas(1600,700);
+    var canvas = createCanvas(windowWidth,700);
     engine = Engine.create();
     world = engine.world;
 
     //console.log(string);
     
-    ground = new Ground(800,height,1600,20);
+    ground = new Ground(width / 2,height,width,20);
     ground2 = new Ground(275, 300, 600, 20);
 
     box1 = new Box(1200,320,70,70);
@@ -110,7 +110,7 @@ function draw(){
     textSize(30);
     fill(0)
     text("Lives: " + lives, 20, 50);
-    text("Score: " + score, 1450, 50);
+    text("Score: " + score, width - 150, 50);
 
     box1.display();
     box2.display();

@@ -1,4 +1,24 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: lightblue;
+}
+canvas {
+  display: block;
+  margin: auto;
+}
+
+#title {
+  margin: auto;
+  text-align: center;
+  border-style: inset;
+  width: 400px;
+  background-color: royalblue;
+  padding: 10px;
+}
+
+.direct {
+  display: block;
+  margin: auto;
+  font-size: 20pt;
 }
